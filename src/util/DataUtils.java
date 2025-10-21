@@ -5,12 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DataUtils {
-    public static LocalDate converterData(String data) throws Exception {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            return LocalDate.parse(data, formatter);
-        } catch (DateTimeParseException e) {
-            throw new Exception("Data inválida. Use o formato dd/MM/yyyy.");
-        }
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    public static LocalDate parse(String data) throws DateTimeParseException {
+        return LocalDate.parse(data, FORMATTER);
     }
 }

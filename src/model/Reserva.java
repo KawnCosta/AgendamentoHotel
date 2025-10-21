@@ -9,12 +9,12 @@ public class Reserva {
     private LocalDate dataCheckIn;
     private StatusReserva status;
 
-    public Reserva(int id, Cliente cliente, Quarto quarto, LocalDate dataCheckIn) {
+    public Reserva(int id, Cliente cliente, Quarto quarto, LocalDate dataCheckIn, StatusReserva status) {
         this.id = id;
         this.cliente = cliente;
         this.quarto = quarto;
         this.dataCheckIn = dataCheckIn;
-        this.status = StatusReserva.CONFIRMADO;
+        this.status = status;
     }
 
     public int getId() {
@@ -37,16 +37,21 @@ public class Reserva {
         return status;
     }
 
-    public void cancelar() {
-        this.status = StatusReserva.CANCELADO;
+    public void setStatus(StatusReserva status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Reserva #" + id +
-                " | Cliente: " + cliente +
-                " | Quarto: " + quarto +
-                " | Check-in: " + dataCheckIn +
-                " | Status: " + status;
+        return String.format(
+            "Reserva #%d | Cliente: %s (CPF: %s) | Quarto: %s - Nº %d | Check-in: %s | Status: %s",
+            id,
+            cliente.getNome(),
+            cliente.getDocumento(),
+            quarto.getClass().getSimpleName().replace("Quarto", ""),
+            quarto.getNumero(),
+            dataCheckIn,
+            status
+        );
     }
 }
